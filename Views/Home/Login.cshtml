@@ -1,0 +1,43 @@
+<h1>Login</h1>
+
+<div id="loginForm" style="padding:10px">
+    <label>Email:</label><br />
+    <input type="email" id="emailLogin" value="admin@gmail.com" /> <br /><br />
+    <label>Password:</label><br />
+    <input type="password" id="passwordLogin" value="12345" /><br /><br />
+    <input type="button" id="submitLogin" value="Login" />
+</div>
+
+@Html.ActionLink("Dashboard", "Dashboard")
+
+<script>
+    const tokenKey = "accessToken";
+
+    document.getElementById("submitLogin").addEventListener("click", e => {
+        getTokenAsync();
+    });
+
+    async function getTokenAsync() {
+        const formData = new FormData();
+        formData.append("grant_type", "password");
+        formData.append("username", document.getElementById("emailLogin").value);
+        formData.append("password", document.getElementById("passwordLogin").value);
+
+        const response = await fetch('@Url.Action("Token", "Account")', {
+            method: "POST",
+            headers: { "Accept": "application/json" },
+            body: formData
+        });
+
+        if (response.ok === true) {
+            alert("Login completed. Go to the Dashboard page.");
+            const data = await response.json();
+            sessionStorage.setItem(tokenKey, data.access_token);
+            console.log(data.access_token);
+        }
+        else {
+            alert("Login failed.");
+            console.log("Error: ", response.status, data.errorText);
+        }
+    }
+</script>

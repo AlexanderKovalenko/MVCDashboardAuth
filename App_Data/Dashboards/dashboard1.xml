@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard>
+  <Title Text="New Dashboard" />
+  <DataSources>
+    <ObjectDataSource Name="ObjectDataSource" ComponentName="objectDataSource1" DataId="odsSales">
+      <DataSource Type="ProductSales, MVCDashboardAuth, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
+      <DataMember>GetProductSales</DataMember>
+    </ObjectDataSource>
+  </DataSources>
+  <Items>
+    <Grid ComponentName="gridDashboardItem1" Name="Grid 1" DataSource="objectDataSource1">
+      <DataItems>
+        <Dimension DataMember="OrderID" DefaultId="DataItem0" />
+        <Dimension DataMember="Category" DefaultId="DataItem1" />
+        <Dimension DataMember="Product" DefaultId="DataItem2" />
+        <Dimension DataMember="OrderDate" DateTimeGroupInterval="None" DefaultId="DataItem3" />
+        <Measure DataMember="Sales" DefaultId="DataItem4" />
+      </DataItems>
+      <GridColumns>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem0" />
+        </GridDimensionColumn>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem1" />
+        </GridDimensionColumn>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem2" />
+        </GridDimensionColumn>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem3" />
+        </GridDimensionColumn>
+        <GridMeasureColumn>
+          <Measure DefaultId="DataItem4" />
+        </GridMeasureColumn>
+      </GridColumns>
+      <GridOptions />
+    </Grid>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutItem DashboardItem="gridDashboardItem1" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>
